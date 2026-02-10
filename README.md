@@ -1,81 +1,50 @@
-# 🔄 Data Pipeline Recipes
+# data-pipeline-recipes
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![LangChain](https://img.shields.io/badge/LangChain-🦜-green)](https://docs.langchain.com)
+A collection of modular data pipeline components for AI and machine learning workflows. This repository provides recipes for web scraping, text cleaning, document embedding, and full end-to-end integration.
 
-> Modular, reusable data pipeline components for AI/ML workflows — scrape, clean, embed, and query.
+## Directory Structure
 
-## 🎯 What's Inside
-
-| Recipe | File | Description |
-|--------|------|-------------|
-| 🕷️ **Web Scraping** | `recipes/web_scraping/scrape_to_markdown.py` | Scrape any URL to clean Markdown |
-| 🧹 **Text Cleaning** | `recipes/data_cleaning/text_cleaner.py` | Normalize, deduplicate, clean text for LLMs |
-| 🔢 **Embedding** | `recipes/embedding/embed_and_store.py` | Embed documents and store in FAISS |
-| 🔄 **Full Pipeline** | `recipes/full_pipeline/end_to_end.py` | Scrape → Clean → Embed → Query in one command |
-
-## 🏗️ Architecture
-
-```
-               ┌──────────┐     ┌──────────┐     ┌──────────┐     ┌───────┐
-  URLs/Files → │  Scrape   │ → │  Clean    │ → │  Embed    │ → │ Query  │
-               └──────────┘     └──────────┘     └──────────┘     └───────┘
-               Crawl4AI /       Unicode norm     OpenAI Embed     FAISS
-               Requests +       Dedup, strip     Chunk + Index    Similarity
-               BeautifulSoup    HTML/noise                        Search
+```text
+data-pipeline-recipes/
+├── recipes/
+│   ├── web_scraping/      # URL to Markdown extraction
+│   ├── data_cleaning/     # Text normalization and denoising
+│   ├── embedding/         # Vector storage and retrieval
+│   └── full_pipeline/     # Composability examples
+└── docs/                  # Recipe documentation
 ```
 
-## 🚀 Quick Start
+## Recipes
+
+- **Web Scraping**: Extract clean Markdown from web pages using BeautifulSoup or async rendering.
+- **Text Cleaning**: Normalize unicode, remove HTML artifacts, and deduplicate content for LLM training or inference.
+- **Embedding & Storage**: Document chunking and indexing using OpenAI embeddings and local FAISS storage.
+- **End-to-End**: A complete Scrape -> Clean -> Embed -> Query pipeline implemented in a single command.
+
+## Setup
 
 ```bash
-git clone https://github.com/kagithamanoj/data-pipeline-recipes.git
-cd data-pipeline-recipes
-python -m venv .venv && source .venv/bin/activate
+# Installation
 pip install -r requirements.txt
-cp .env.example .env  # Add OPENAI_API_KEY
+
+# Environment
+cp .env.example .env
+# Add OPENAI_API_KEY to .env
 ```
 
-### Run Individual Recipes
+## Usage
+
+Run individual components or the full orchestration script:
 
 ```bash
-# Scrape a website to Markdown
-python recipes/web_scraping/scrape_to_markdown.py --url "https://docs.python.org/3/"
-
-# Clean text
+# Clean a text file
 python recipes/data_cleaning/text_cleaner.py --input raw.txt --output clean.txt
 
-# Embed & query documents
-python recipes/embedding/embed_and_store.py --input ./docs/ --query "What is Python?"
+# Run integrated pipeline
+python recipes/full_pipeline/end_to_end.py --urls https://example.com --query "Summary"
 ```
-
-### Run the Full Pipeline
-
-```bash
-# Scrape → Clean → Embed → Query — one command
-python recipes/full_pipeline/end_to_end.py \
-  --urls https://example.com https://docs.python.org/3/ \
-  --query "What is this about?"
-```
-
-## 📦 Recipes
-
-### 🕷️ Web Scraping
-Scrape websites into clean Markdown. Supports Crawl4AI (async, JS rendering) and requests+BeautifulSoup fallback.
-
-### 🧹 Text Cleaning
-Clean raw text for LLM processing: remove HTML, normalize unicode, deduplicate paragraphs, strip navigation artifacts.
-
-### 🔢 Embedding & Storage
-Load text files → chunk with LangChain splitter → embed with OpenAI → store in FAISS.
-
-### 🔄 End-to-End Pipeline
-Combines all steps into one composable pipeline.
-
-## 📄 License
-
-MIT — see [LICENSE](LICENSE).
 
 ---
 
-**Built by** [Manoj Kumar Kagitha](https://github.com/kagithamanoj) 🚀
+**Manoj Kumar Kagitha**
+[GitHub](https://github.com/kagithamanoj)
