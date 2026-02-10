@@ -1,8 +1,6 @@
 """
 JSON/Structured Data Extraction — Extract structured data from unstructured text.
 
-Inspired by: ragflow structured extraction patterns
-
 Usage:
     python recipes/json_extraction/extract_structured.py --demo
     python recipes/json_extraction/extract_structured.py --input text.txt --schema "name,email,phone"
@@ -128,8 +126,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.demo or not args.input:
-        print("🔍 Structured Data Extraction — Demo")
-        print("=" * 50)
+        print("Structured Data Extraction — Demo")
+        print("-" * 50)
 
         sample_text = """
         Meeting Notes — January 15, 2025
@@ -164,25 +162,25 @@ if __name__ == "__main__":
 
         result = extract_all(sample_text)
 
-        print("\n📧 Emails found:")
+        print("\nEmails found:")
         for email in result["emails"]:
-            print(f"  • {email}")
+            print(f"  * {email}")
 
-        print(f"\n📞 Phone numbers: {result['phones']}")
-        print(f"\n🔗 URLs: {result['urls']}")
-        print(f"\n📅 Dates: {result['dates']}")
+        print(f"\nPhone numbers: {result['phones']}")
+        print(f"\nURLs: {result['urls']}")
+        print(f"\nDates: {result['dates']}")
 
-        print("\n💰 Monetary values:")
+        print("\nMonetary values:")
         for m in result["monetary"]:
-            print(f"  • {m['raw']} → {m['amount']} {m['currency']}")
+            print(f"  * {m['raw']} -> {m['amount']} {m['currency']}")
 
-        print("\n🔑 Key-Value Pairs:")
+        print("\nKey-Value Pairs:")
         for k, v in result["key_value_pairs"].items():
-            print(f"  • {k}: {v}")
+            print(f"  * {k}: {v}")
 
         # Stats
         total = sum(len(v) if isinstance(v, list) else len(v) if isinstance(v, dict) else 0 for v in result.values())
-        print(f"\n📊 Total items extracted: {total}")
+        print(f"\nItems extracted: {total}")
 
     elif args.input:
         text = Path(args.input).read_text(encoding="utf-8")
