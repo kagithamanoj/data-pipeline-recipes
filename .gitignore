@@ -1,0 +1,19 @@
+# Byte-compiled
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env
+.env.local
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.log
+logs/
+outputs/
+vectorstore/
+*.faiss
+*.pkl
